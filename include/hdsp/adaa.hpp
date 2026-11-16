@@ -55,6 +55,11 @@ public:
     const double bd = bias;
     const double tb = std::tanh(bd);
     const float norm = static_cast<float>(kd * (1.0 - tb * tb));
+    // k = 0 (or a bias so extreme the normalisation collapses) is a bypass,
+    // not a divide by zero.
+    if (std::fabs(norm) < 1.0e-6f) {
+      return x;
+    }
     auto f = [kd, bd, tb](double v) { return std::tanh(kd * v + bd) - tb; };
     auto F = [kd, bd, tb](double v) {
       return logCosh(kd * v + bd) / kd - tb * v;

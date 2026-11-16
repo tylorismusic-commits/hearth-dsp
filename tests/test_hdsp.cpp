@@ -110,6 +110,9 @@ int main() {
       peak = std::max(peak, std::fabs(y));
     }
     check(finite && peak > 0.1f && peak < 3.0f, "ADAA shaper is bounded");
+    AsymShaper bypass;
+    check(std::fabs(bypass.process(0.5f, 0.0f, 0.0f) - 0.5f) < 1.0e-6f,
+          "ADAA shaper with zero drive is a bypass");
   }
 
   // True-peak detector

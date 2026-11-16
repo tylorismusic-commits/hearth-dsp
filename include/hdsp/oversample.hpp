@@ -49,8 +49,9 @@ public:
     return stages_ == 0 ? 0 : (stages_ == 1 ? 30 : 45);
   }
 
-  // Upsamples n base-rate frames into n * factor() frames.  Input is clamped
-  // and made finite here, so the filter state cannot be poisoned.
+  // Upsamples n base-rate frames into n * factor() frames.  n must be at most
+  // kMaxBaseFrames; larger blocks are the caller's job to chunk.  Input is
+  // clamped and finite, so the filter state cannot be poisoned.
   void up(const float* inL, const float* inR, int n, float* outL,
           float* outR) noexcept {
     if (n <= 0) {
