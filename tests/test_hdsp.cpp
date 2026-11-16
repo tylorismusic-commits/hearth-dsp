@@ -190,6 +190,74 @@ int main() {
     check(arg - 100 == expect, label);
   }
 
+  // Linkwitz-Riley three-band split.
+  {
+    ThreeBandCrossover xo;
+    xo.prepare(kSr);
+    xo.setCrossovers(120.0f, 2500.0f);
+    unsigned seed = 12345u;
+    double inPower = 0.0;
+    double sumPower = 0.0;
+    for (int b = 0; b < 200; ++b) {
+      for (int i = 0; i < 256; ++i) {
+        seed = seed * 1664525u + 1013904223u;
+        const float x = (static_cast<float>((seed >> 8) & 0xffff) / 32768.0f) - 1.0f;
+        float low = 0.0f, mid = 0.0f, high = 0.0f;
+        xo.process(x, low, mid, high);
+        if (b > 40) {
+          inPower += static_cast<double>(x) * x;
+          const double sum = static_cast<double>(low) + mid + high;
+          sumPower += sum * sum;
+        }
+      }
+    }
+    const double ratio = sumPower / std::max(inPower, 1e-20);
+    check(std::fabs(ratio - 1.0) < 0.02,
+          "three-band crossover sums flat when clean");
+  }
+  {
+    ThreeBandCrossover xo;
+    xo.prepare(kSr);
+    xo.setCrossovers(120.0f, 2500.0f);
+    double lowPower = 0.0, midPower = 0.0, highPower = 0.0;
+    for (int b = 0; b < 120; ++b) {
+      for (int i = 0; i < 256; ++i) {
+        const float x = 0.5f * std::sin(2.0f * kPi * 80.0f *
+                                        static_cast<float>(b * 256 + i) / kSr);
+        float low = 0.0f, mid = 0.0f, high = 0.0f;
+        xo.process(x, low, mid, high);
+        if (b > 40) {
+          lowPower += static_cast<double>(low) * low;
+          midPower += static_cast<double>(mid) * mid;
+          highPower += static_cast<double>(high) * high;
+        }
+      }
+    }
+    check(lowPower > 20.0 * (midPower + highPower),
+          "80 Hz sine stays mostly in the low band");
+  }
+  {
+    ThreeBandCrossover xo;
+    xo.prepare(kSr);
+    xo.setCrossovers(120.0f, 2500.0f);
+    double lowPower = 0.0, midPower = 0.0, highPower = 0.0;
+    for (int b = 0; b < 120; ++b) {
+      for (int i = 0; i < 256; ++i) {
+        const float x = 0.5f * std::sin(2.0f * kPi * 8000.0f *
+                                        static_cast<float>(b * 256 + i) / kSr);
+        float low = 0.0f, mid = 0.0f, high = 0.0f;
+        xo.process(x, low, mid, high);
+        if (b > 40) {
+          lowPower += static_cast<double>(low) * low;
+          midPower += static_cast<double>(mid) * mid;
+          highPower += static_cast<double>(high) * high;
+        }
+      }
+    }
+    check(highPower > 20.0 * (lowPower + midPower),
+          "8 kHz sine stays mostly in the high band");
+  }
+
   std::printf("%d failure(s)\n", gFailures);
   return gFailures == 0 ? 0 : 1;
 }

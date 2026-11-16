@@ -8,6 +8,9 @@ being copied into every plugin.
 
 ## Modules
 
+- **Crossover** — 4th-order Linkwitz-Riley low/high split and a serial
+  three-band splitter for multiband saturation.
+
 | Header | Contents |
 |---|---|
 | `hdsp/util.hpp` | `kPi`, `clampf` |

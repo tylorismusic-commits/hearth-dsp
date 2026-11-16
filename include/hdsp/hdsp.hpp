@@ -4,6 +4,7 @@
 
 #include "hdsp/adaa.hpp"
 #include "hdsp/biquad.hpp"
+#include "hdsp/crossover.hpp"
 #include "hdsp/db.hpp"
 #include "hdsp/dynamics.hpp"
 #include "hdsp/envelope.hpp"
