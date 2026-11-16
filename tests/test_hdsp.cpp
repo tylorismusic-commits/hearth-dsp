@@ -258,6 +258,78 @@ int main() {
           "8 kHz sine stays mostly in the high band");
   }
 
+  // Four-band Linkwitz-Riley split.
+  {
+    FourBandCrossover xo;
+    xo.prepare(kSr);
+    xo.setCrossovers(100.0f, 800.0f, 5000.0f);
+    unsigned seed = 98765u;
+    double inPower = 0.0;
+    double sumPower = 0.0;
+    for (int b = 0; b < 200; ++b) {
+      for (int i = 0; i < 256; ++i) {
+        seed = seed * 1664525u + 1013904223u;
+        const float x = (static_cast<float>((seed >> 8) & 0xffff) / 32768.0f) - 1.0f;
+        float b0 = 0.0f, b1 = 0.0f, b2 = 0.0f, b3 = 0.0f;
+        xo.process(x, b0, b1, b2, b3);
+        if (b > 40) {
+          inPower += static_cast<double>(x) * x;
+          const double sum =
+              static_cast<double>(b0) + b1 + b2 + b3;
+          sumPower += sum * sum;
+        }
+      }
+    }
+    const double ratio = sumPower / std::max(inPower, 1e-20);
+    check(std::fabs(ratio - 1.0) < 0.02,
+          "four-band crossover sums flat when clean");
+  }
+
+  // Spectrum analyser: a 1 kHz tone must peak in the right log bin.
+  {
+    SpectrumAnalyzer sa;
+    sa.prepare(kSr);
+    std::vector<float> l(256), r(256);
+    for (int b = 0; b < 200; ++b) {
+      for (int i = 0; i < 256; ++i) {
+        const float t = static_cast<float>(b * 256 + i) / kSr;
+        l[i] = r[i] = 0.5f * std::sin(2.0f * kPi * 1000.0f * t);
+      }
+      sa.push(l.data(), r.data(), 256);
+    }
+    const float* bins = sa.bins();
+    int peak = 0;
+    for (int i = 1; i < SpectrumAnalyzer::kBins; ++i) {
+      if (bins[i] > bins[peak]) {
+        peak = i;
+      }
+    }
+    const float hz = SpectrumAnalyzer::binFrequency(peak);
+    char label[128];
+    std::snprintf(label, sizeof(label), "spectrum peaks near 1 kHz (%.0f Hz)",
+                  static_cast<double>(hz));
+    check(hz > 780.0f && hz < 1260.0f, label);
+    check(bins[peak] > -20.0f, "spectrum peak has a sane level");
+    const int high = SpectrumAnalyzer::kBins - 8;
+    check(bins[high] < bins[peak] - 30.0f,
+          "spectrum has no false high-frequency peak");
+  }
+  {
+    SpectrumAnalyzer sa;
+    sa.prepare(kSr);
+    std::vector<float> z(256, 0.0f);
+    for (int b = 0; b < 20; ++b) {
+      sa.push(z.data(), z.data(), 256);
+    }
+    bool silent = true;
+    for (int i = 0; i < SpectrumAnalyzer::kBins; ++i) {
+      if (sa.bins()[i] > -110.0f) {
+        silent = false;
+      }
+    }
+    check(silent, "spectrum is at the floor for silence");
+  }
+
   std::printf("%d failure(s)\n", gFailures);
   return gFailures == 0 ? 0 : 1;
 }

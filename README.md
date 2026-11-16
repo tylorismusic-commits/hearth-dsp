@@ -8,8 +8,10 @@ being copied into every plugin.
 
 ## Modules
 
-- **Crossover** — 4th-order Linkwitz-Riley low/high split and a serial
-  three-band splitter for multiband saturation.
+- **Crossover** — 4th-order Linkwitz-Riley low/high split, three-band and
+  four-band serial splitters for multiband saturation.
+- **Spectrum** — real-time FFT analyser with 128 log-spaced bins for editor
+  meters.
 
 | Header | Contents |
 |---|---|

@@ -74,4 +74,41 @@ private:
   LinkwitzRiley4 highSplit_;
 };
 
+// Four bands from three serial LR4 splits.  As with the three-band split,
+// low + low-mid + high-mid + high reconstructs the input magnitude when the
+// bands are clean.
+struct FourBandCrossover {
+  void prepare(float sampleRate) noexcept {
+    split1_.prepare(sampleRate);
+    split2_.prepare(sampleRate);
+    split3_.prepare(sampleRate);
+  }
+
+  void setCrossovers(float f1, float f2, float f3) noexcept {
+    split1_.setCrossover(f1);
+    split2_.setCrossover(f2);
+    split3_.setCrossover(f3);
+  }
+
+  void reset() noexcept {
+    split1_.reset();
+    split2_.reset();
+    split3_.reset();
+  }
+
+  inline void process(float x, float& b0, float& b1, float& b2,
+                      float& b3) noexcept {
+    float rest1 = 0.0f;
+    float rest2 = 0.0f;
+    split1_.process(x, b0, rest1);
+    split2_.process(rest1, b1, rest2);
+    split3_.process(rest2, b2, b3);
+  }
+
+private:
+  LinkwitzRiley4 split1_;
+  LinkwitzRiley4 split2_;
+  LinkwitzRiley4 split3_;
+};
+
 } // namespace hdsp

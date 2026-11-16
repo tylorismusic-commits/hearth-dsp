@@ -11,5 +11,6 @@
 #include "hdsp/oversample.hpp"
 #include "hdsp/sidechain.hpp"
 #include "hdsp/smoother.hpp"
+#include "hdsp/spectrum.hpp"
 #include "hdsp/truepeak.hpp"
 #include "hdsp/util.hpp"
