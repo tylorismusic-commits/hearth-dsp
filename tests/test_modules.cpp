@@ -481,6 +481,23 @@ int main() {
     check(finite(w), "Fattener stays finite");
   }
 
+  // Hyrax
+  {
+    Hyrax hyrax;
+    hyrax.prepare(kSr);
+    HyraxControls c;
+    hyrax.setControls(c);
+    auto x = tone(1000.0f, 1.0f);
+    float gr = 0.0f;
+    for (int i = 0; i < kN; ++i) {
+      hyrax.process(x[i], x[i]);
+      gr = std::max(gr, hyrax.lastGrDb());
+    }
+    check(finite(x), "Hyrax stays finite");
+    check(gr > 0.1f, "Hyrax reports gain reduction");
+    check(hyrax.latencySamples() > 0, "Hyrax reports latency");
+  }
+
   // Modern Limiter
   {
     ModernLimiter limiter;

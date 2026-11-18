@@ -27,6 +27,7 @@
 #include "gate.hpp"
 #include "image.hpp"
 #include "limiter.hpp"
+#include "hyrax.hpp"
 #include "lmc1.hpp"
 #include "modern_limiter.hpp"
 #include "motion.hpp"
