@@ -11,7 +11,9 @@
 
 #include <hdsp/db.hpp>
 
+#include "comp/clean.hpp"
 #include "comp/controls.hpp"
+#include "comp/distressor.hpp"
 #include "comp/fet.hpp"
 #include "comp/optical.hpp"
 #include "comp/vca.hpp"
@@ -27,6 +29,7 @@ struct CompControls {
   float makeup = 0.50f;
   float mix = 1.00f;
   float scHpf = 0.05f;
+  float distortion = 0.00f;  // Xpress only
 };
 
 class Comp {
@@ -38,6 +41,8 @@ public:
     opto2A_.prepare(sr_, comp::OptoLeveler::Variant::LA2A);
     opto3A_.prepare(sr_, comp::OptoLeveler::Variant::LA3A);
     vca_.prepare(sr_);
+    xpress_.prepare(sr_);
+    clean_.prepare(sr_);
     reset();
   }
 
@@ -92,6 +97,21 @@ public:
         cc.threshold = thr;
         vca_.setControls(cc);
         break;
+      case 7:
+        model_ = 7;
+        cc.input = thr;
+        cc.output = c.makeup;
+        cc.distortion = c.distortion;
+        xpress_.setControls(cc);
+        break;
+      case 8:
+        model_ = 8;
+        cc.input = 0.5f;
+        cc.threshold = thr;
+        cc.output = 0.5f;
+        cc.knee = 0.5f;
+        clean_.setControls(cc);
+        break;
       default:
         model_ = 0;
         fetBlue_.setControls(cc);
@@ -108,6 +128,8 @@ public:
       case 1: gr = fetBlack_.process(l, r); break;
       case 2: gr = opto2A_.process(l, r); break;
       case 3: gr = opto3A_.process(l, r); break;
+      case 7: gr = xpress_.process(l, r); break;
+      case 8: gr = clean_.process(l, r); break;
       default: gr = vca_.process(l, r); break;
     }
     if (model_ == 5) {
@@ -129,6 +151,8 @@ public:
     opto2A_.reset();
     opto3A_.reset();
     vca_.reset();
+    xpress_.reset();
+    clean_.reset();
   }
 
 private:
@@ -148,6 +172,8 @@ private:
   comp::OptoLeveler opto2A_;
   comp::OptoLeveler opto3A_;
   comp::BusVca vca_;
+  comp::Distressor xpress_;
+  comp::CleanCompressor clean_;
 };
 
 } // namespace hdsp::modules
