@@ -39,8 +39,10 @@ Suite Rack EQ, compressor, colour, gate, transient, clip and de-esser stages.
 | `hdsp/modules/crush.hpp` | `Crush`, `CrushControls` — bitcrusher |
 | `hdsp/modules/image.hpp` | `Image`, `ImageControls` — width, mono-maker, balance, M/S |
 | `hdsp/modules/bleedout.hpp` | `BleedOut`, `BleedOutControls` — multiband de-bleed gate |
+| `hdsp/modules/filter.hpp` | `Filter`, `FilterControls` — auto-filter / envelope filter |
 | `hdsp/modules/gate.hpp` | `Gate`, `GateControls` |
 | `hdsp/modules/limiter.hpp` | `Limiter`, `LimiterControls` — lookahead peak limiter |
+| `hdsp/modules/motion.hpp` | `Motion`, `MotionControls` — tremolo, auto-pan, rotary |
 | `hdsp/modules/transient.hpp` | `Transient`, `TransientControls` |
 | `hdsp/modules/clip.hpp` | `Clip`, `ClipControls` |
 | `hdsp/modules/deess.hpp` | `DeEss`, `DeEssControls` |

@@ -200,6 +200,40 @@ int main() {
     check(std::fabs(x[100]) < 0.5f, "crush quantizes the signal");
   }
 
+  // Filter
+  {
+    Filter filter;
+    filter.prepare(kSr);
+    FilterControls c;
+    c.cutoff = 0.3f;
+    c.resonance = 0.5f;
+    c.mode = 0;
+    filter.setControls(c);
+    auto x = tone(1000.0f);
+    for (int i = 0; i < kN; ++i) filter.process(x[i], x[i]);
+    check(finite(x), "filter stays finite");
+  }
+
+  // Motion
+  {
+    Motion motion;
+    motion.prepare(kSr);
+    MotionControls c;
+    c.rate = 0.5f;
+    c.depth = 1.0f;
+    c.width = 1.0f;
+    c.mode = 1;
+    c.mix = 1.0f;
+    motion.setControls(c);
+    float l = 0.5f, r = 0.5f;
+    for (int i = 0; i < 2000; ++i) {
+      l = 0.5f;
+      r = 0.5f;
+      motion.process(l, r);
+    }
+    check(std::fabs(l - r) > 0.01f, "auto-pan moves the stereo image");
+  }
+
   // Peak limiter
   {
     Limiter limiter;
