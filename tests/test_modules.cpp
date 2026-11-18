@@ -228,6 +228,48 @@ int main() {
           "double adds a delayed copy");
   }
 
+  // Dynamic EQ
+  {
+    DynamicEq eq;
+    eq.prepare(kSr);
+    DynamicEqControls c;
+    c.frequency = 0.566f;  // ~1 kHz
+    c.q = 0.5f;
+    c.threshold = 0.2f;
+    c.range = 1.0f;
+    c.ratio = 1.0f;
+    c.mix = 1.0f;
+    eq.setControls(c);
+    auto x = tone(1000.0f);
+    float gr = 0.0f;
+    for (int i = 0; i < kN; ++i) {
+      eq.process(x[i], x[i]);
+      gr = std::max(gr, eq.lastGrDb());
+    }
+    check(finite(x), "dynamic EQ stays finite");
+    check(gr > 0.1f, "dynamic EQ reports gain reduction");
+  }
+
+  // Multiband
+  {
+    Multiband mb;
+    mb.prepare(kSr);
+    MultibandControls c;
+    c.lowThreshold = 0.2f;
+    c.midThreshold = 0.2f;
+    c.highThreshold = 0.2f;
+    c.ratio = 1.0f;
+    mb.setControls(c);
+    auto x = tone(1000.0f);
+    float gr = 0.0f;
+    for (int i = 0; i < kN; ++i) {
+      mb.process(x[i], x[i]);
+      gr = std::max(gr, mb.lastGrDb());
+    }
+    check(finite(x), "multiband stays finite");
+    check(gr > 0.1f, "multiband reports gain reduction");
+  }
+
   // Filter
   {
     Filter filter;

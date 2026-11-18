@@ -43,11 +43,13 @@ Suite Rack EQ, compressor, colour, gate, transient, clip and de-esser stages.
 | `hdsp/modules/gate.hpp` | `Gate`, `GateControls` |
 | `hdsp/modules/limiter.hpp` | `Limiter`, `LimiterControls` — lookahead peak limiter |
 | `hdsp/modules/motion.hpp` | `Motion`, `MotionControls` — tremolo, auto-pan, rotary |
+| `hdsp/modules/multiband.hpp` | `Multiband`, `MultibandControls` — three-band compressor |
 | `hdsp/modules/sub.hpp` | `Sub`, `SubControls` — subharmonic synthesizer |
 | `hdsp/modules/transient.hpp` | `Transient`, `TransientControls` |
 | `hdsp/modules/clip.hpp` | `Clip`, `ClipControls` |
 | `hdsp/modules/deess.hpp` | `DeEss`, `DeEssControls` |
 | `hdsp/modules/double.hpp` | `Double`, `DoubleControls` — doubler / microshift |
+| `hdsp/modules/dynamiceq.hpp` | `DynamicEq`, `DynamicEqControls` — single-band dynamic EQ |
 | `hdsp/modules/density.hpp` | `Density`, `DensityControls` |
 
 `hdsp/hdsp.hpp` includes both the primitives and the processor modules. The
