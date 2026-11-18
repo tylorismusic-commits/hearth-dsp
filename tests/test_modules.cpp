@@ -481,6 +481,17 @@ int main() {
     check(finite(w), "Fattener stays finite");
   }
 
+  // LMC-1
+  {
+    LMC1 lmc;
+    lmc.prepare(kSr);
+    LMC1Controls c;
+    lmc.setControls(c);
+    auto x = tone(1000.0f);
+    for (int i = 0; i < kN; ++i) lmc.process(x[i], x[i]);
+    check(finite(x), "LMC-1 stays finite");
+  }
+
   // AC-1
   {
     AC1 ac1;

@@ -27,6 +27,7 @@
 #include "gate.hpp"
 #include "image.hpp"
 #include "limiter.hpp"
+#include "lmc1.hpp"
 #include "motion.hpp"
 #include "pultec.hpp"
 #include "multiband.hpp"
