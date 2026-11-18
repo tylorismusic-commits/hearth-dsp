@@ -282,6 +282,18 @@ int main() {
     check(gr > 0.1f, "multiband reports gain reduction");
   }
 
+  // Ember
+  {
+    Ember ember;
+    ember.prepare(kSr);
+    EmberControls c;
+    c.amount = 0.5f;
+    ember.setControls(c);
+    auto x = tone(1000.0f);
+    for (int i = 0; i < kN; ++i) ember.process(x[i], x[i]);
+    check(finite(x), "ember stays finite");
+  }
+
   // Reel
   {
     Reel reel;

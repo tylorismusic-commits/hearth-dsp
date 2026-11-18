@@ -14,6 +14,7 @@
 #include "comp.hpp"
 #include "deess.hpp"
 #include "double.hpp"
+#include "ember.hpp"
 #include "dynamiceq.hpp"
 #include "density.hpp"
 #include "eq.hpp"

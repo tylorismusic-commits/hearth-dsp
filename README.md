@@ -55,6 +55,7 @@ Suite Rack EQ, compressor, colour, gate, transient, clip and de-esser stages.
 | `hdsp/modules/deess.hpp` | `DeEss`, `DeEssControls` |
 | `hdsp/modules/double.hpp` | `Double`, `DoubleControls` — doubler / microshift |
 | `hdsp/modules/dynamiceq.hpp` | `DynamicEq`, `DynamicEqControls` — single-band dynamic EQ |
+| `hdsp/modules/ember.hpp` | `Ember`, `EmberControls` — one-knob finish |
 | `hdsp/modules/density.hpp` | `Density`, `DensityControls` |
 
 `hdsp/hdsp.hpp` includes both the primitives and the processor modules. The
