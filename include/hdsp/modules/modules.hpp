@@ -13,6 +13,7 @@
 #include "clip.hpp"
 #include "colour.hpp"
 #include "crush.hpp"
+#include "custom_eq.hpp"
 #include "datube.hpp"
 #include "fattener.hpp"
 #include "comp.hpp"

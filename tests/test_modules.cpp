@@ -557,6 +557,26 @@ int main() {
     }
   }
 
+  // Custom EQ
+  {
+    CustomEq eq;
+    eq.prepare(kSr);
+    CustomEqControls c;
+    c.lowFreq = 0.0f;   // 60 Hz
+    c.lowGain = 1.0f;   // +12 dB
+    eq.setControls(c);
+    auto low = tone(60.0f, 0.1f);
+    double before = rms(low, 4800, kN);
+    for (int i = 0; i < kN; ++i) {
+      float l = low[i], r = low[i];
+      eq.process(l, r);
+      low[i] = l;
+    }
+    check(finite(low), "Custom EQ stays finite");
+    check(rms(low, 4800, kN) > before * 1.6,
+          "Custom EQ low boost lifts 60 Hz");
+  }
+
   // Hybrid EQ
   {
     HybridEq eq;
