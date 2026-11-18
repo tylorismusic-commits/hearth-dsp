@@ -481,6 +481,27 @@ int main() {
     check(finite(w), "Fattener stays finite");
   }
 
+  // VBL
+  {
+    VBL vbl;
+    vbl.prepare(kSr);
+    VBLControls c;
+    c.comp = 0.5f;
+    c.emphasis = 0.7f;
+    c.bias = 0.6f;
+    c.amp = 0.3f;
+    c.brilliance = 0.4f;
+    vbl.setControls(c);
+    auto x = tone(1000.0f, 0.9f);
+    float gr = 0.0f;
+    for (int i = 0; i < kN; ++i) {
+      vbl.process(x[i], x[i]);
+      gr = std::max(gr, vbl.lastGrDb());
+    }
+    check(finite(x), "VBL stays finite");
+    check(gr > 0.1f, "VBL reports gain reduction");
+  }
+
   // DuTape
   {
     for (int model = 0; model < 6; ++model) {
