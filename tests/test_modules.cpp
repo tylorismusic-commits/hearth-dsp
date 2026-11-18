@@ -200,6 +200,34 @@ int main() {
     check(std::fabs(x[100]) < 0.5f, "crush quantizes the signal");
   }
 
+  // Sub
+  {
+    Sub sub;
+    sub.prepare(kSr);
+    SubControls c;
+    sub.setControls(c);
+    auto dry = tone(100.0f);
+    auto wet = dry;
+    for (int i = 0; i < kN; ++i) sub.process(wet[i], wet[i]);
+    check(finite(wet), "sub stays finite");
+    check(std::fabs(wet[200] - dry[200]) > 1.0e-4f,
+          "sub adds a subharmonic component");
+  }
+
+  // Double
+  {
+    Double doubler;
+    doubler.prepare(kSr);
+    DoubleControls c;
+    doubler.setControls(c);
+    auto dry = tone(1000.0f);
+    auto wet = dry;
+    for (int i = 0; i < kN; ++i) doubler.process(wet[i], wet[i]);
+    check(finite(wet), "double stays finite");
+    check(std::fabs(wet[2000] - dry[2000]) > 1.0e-4f,
+          "double adds a delayed copy");
+  }
+
   // Filter
   {
     Filter filter;

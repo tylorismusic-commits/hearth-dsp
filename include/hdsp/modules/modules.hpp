@@ -12,6 +12,7 @@
 #include "crush.hpp"
 #include "comp.hpp"
 #include "deess.hpp"
+#include "double.hpp"
 #include "density.hpp"
 #include "eq.hpp"
 #include "filter.hpp"
@@ -19,4 +20,5 @@
 #include "image.hpp"
 #include "limiter.hpp"
 #include "motion.hpp"
+#include "sub.hpp"
 #include "transient.hpp"
