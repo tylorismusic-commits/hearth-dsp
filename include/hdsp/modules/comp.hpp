@@ -19,7 +19,7 @@
 namespace hdsp::modules {
 
 struct CompControls {
-  int model = 0;  // 0 76Blue, 1 76Black, 2 2A, 3 3A, 4 VCA
+  int model = 0;  // 0 76Blue, 1 76Black, 2 2A, 3 3A, 4 VCA, 5 Hearth, 6 Glue
   float threshold = 0.50f;
   float ratio = 0.50f;
   float attack = 0.25f;
@@ -82,12 +82,22 @@ public:
         cc.threshold = thr;
         vca_.setControls(cc);
         break;
+      case 5:
+        model_ = 5;
+        cc.threshold = thr;
+        vca_.setControls(cc);
+        break;
+      case 6:
+        model_ = 6;
+        cc.threshold = thr;
+        vca_.setControls(cc);
+        break;
       default:
         model_ = 0;
         fetBlue_.setControls(cc);
         break;
     }
-    trim_ = model_ == 4 ? 1.0f : hdsp::dbToGain(comp::kModelTrimDb[model_]);
+    trim_ = model_ >= 4 ? 1.0f : hdsp::dbToGain(comp::kModelTrimDb[model_]);
   }
 
   inline float process(float& l, float& r) noexcept {
@@ -99,6 +109,13 @@ public:
       case 2: gr = opto2A_.process(l, r); break;
       case 3: gr = opto3A_.process(l, r); break;
       default: gr = vca_.process(l, r); break;
+    }
+    if (model_ == 5) {
+      l = softSat(l, 1.15f);
+      r = softSat(r, 1.15f);
+    } else if (model_ == 6) {
+      l = softSat(l, 1.08f);
+      r = softSat(r, 1.08f);
     }
     l = dryL + (l * trim_ - dryL) * mix_;
     r = dryR + (r * trim_ - dryR) * mix_;
@@ -115,6 +132,12 @@ public:
   }
 
 private:
+  static float softSat(float x, float drive) noexcept {
+    constexpr float bias = 0.02f;
+    const float tb = std::tanh(bias);
+    return (std::tanh(x * drive + bias) - tb) / drive;
+  }
+
   float sr_ = 48000.0f;
   int lastModel_ = -1;
   int model_ = 0;

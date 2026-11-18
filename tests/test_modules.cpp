@@ -86,6 +86,18 @@ int main() {
     check(gr > 0.5f, "compressor reports gain reduction");
   }
 
+  // Compressor models
+  for (int model = 0; model <= 6; ++model) {
+    Comp comp;
+    comp.prepare(kSr);
+    CompControls c;
+    c.model = model;
+    comp.setControls(c);
+    auto x = tone(1000.0f);
+    for (int i = 0; i < kN; ++i) comp.process(x[i], x[i]);
+    check(finite(x), "compressor model stays finite");
+  }
+
   // Colour models
   for (int model = 0; model < 5; ++model) {
     Colour colour;
