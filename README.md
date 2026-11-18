@@ -36,6 +36,8 @@ Suite Rack EQ, compressor, colour, gate, transient, clip and de-esser stages.
 | `hdsp/modules/comp.hpp` | `Comp`, `CompControls` — 76 Blue, 76 Black, 2A, 3A and VCA |
 | `hdsp/modules/comp/` | FET, optical and VCA model implementations |
 | `hdsp/modules/colour.hpp` | `Colour`, `ColourControls` — Valve, Console, Bus, Tape, Transformer |
+| `hdsp/modules/crush.hpp` | `Crush`, `CrushControls` — bitcrusher |
+| `hdsp/modules/image.hpp` | `Image`, `ImageControls` — width, mono-maker, balance, M/S |
 | `hdsp/modules/bleedout.hpp` | `BleedOut`, `BleedOutControls` — multiband de-bleed gate |
 | `hdsp/modules/gate.hpp` | `Gate`, `GateControls` |
 | `hdsp/modules/limiter.hpp` | `Limiter`, `LimiterControls` — lookahead peak limiter |

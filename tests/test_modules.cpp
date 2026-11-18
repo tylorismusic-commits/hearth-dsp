@@ -171,6 +171,35 @@ int main() {
     check(finite(x), "density stays finite");
   }
 
+  // Image
+  {
+    Image image;
+    image.prepare(kSr);
+    ImageControls c;
+    c.width = 1.0f;
+    image.setControls(c);
+    float l = 0.25f, r = -0.25f;
+    image.process(l, r);
+    check(std::fabs(l) > 0.25f && std::fabs(r) > 0.25f,
+          "image width expands the side signal");
+  }
+
+  // Crush
+  {
+    Crush crush;
+    crush.prepare(kSr);
+    CrushControls c;
+    c.bits = 0.2f;
+    c.rate = 0.5f;
+    c.tone = 1.0f;
+    c.mix = 1.0f;
+    crush.setControls(c);
+    auto x = tone(1000.0f);
+    for (int i = 0; i < kN; ++i) crush.process(x[i], x[i]);
+    check(finite(x), "crush stays finite");
+    check(std::fabs(x[100]) < 0.5f, "crush quantizes the signal");
+  }
+
   // Peak limiter
   {
     Limiter limiter;
