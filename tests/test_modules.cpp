@@ -572,6 +572,29 @@ int main() {
     }
   }
 
+  // O3
+  {
+    for (int isp = 0; isp < 2; ++isp) {
+      O3 o3;
+      o3.prepare(kSr);
+      O3Controls c;
+      c.threshold = 0.0f;
+      c.margin = 0.5f;
+      c.character = 0.5f;
+      c.preventIsp = isp != 0;
+      o3.setControls(c);
+      auto x = tone(1000.0f, 0.9f);
+      float gr = 0.0f;
+      for (int i = 0; i < kN; ++i) {
+        o3.process(x[i], x[i]);
+        gr = std::max(gr, o3.lastGrDb());
+      }
+      check(finite(x), "O3 stays finite");
+      check(gr > 0.1f, "O3 reports gain reduction");
+      check(o3.latencySamples() > 0, "O3 reports latency");
+    }
+  }
+
   // L2
   {
     for (int autoRelease = 0; autoRelease < 2; ++autoRelease) {

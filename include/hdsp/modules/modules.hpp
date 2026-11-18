@@ -35,6 +35,7 @@
 #include "l2.hpp"
 #include "lmc1.hpp"
 #include "modern_limiter.hpp"
+#include "o3.hpp"
 #include "rs124.hpp"
 #include "motion.hpp"
 #include "pultec.hpp"
