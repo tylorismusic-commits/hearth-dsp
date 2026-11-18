@@ -572,6 +572,28 @@ int main() {
     }
   }
 
+  // L2
+  {
+    for (int autoRelease = 0; autoRelease < 2; ++autoRelease) {
+      L2 l2;
+      l2.prepare(kSr);
+      L2Controls c;
+      c.autoRelease = autoRelease != 0;
+      c.threshold = 0.5f;
+      c.release = 0.5f;
+      l2.setControls(c);
+      auto x = tone(1000.0f, 1.0f);
+      float gr = 0.0f;
+      for (int i = 0; i < kN; ++i) {
+        l2.process(x[i], x[i]);
+        gr = std::max(gr, l2.lastGrDb());
+      }
+      check(finite(x), "L2 stays finite");
+      check(gr > 0.1f, "L2 reports gain reduction");
+      check(l2.latencySamples() > 0, "L2 reports lookahead latency");
+    }
+  }
+
   // Hyrax
   {
     Hyrax hyrax;

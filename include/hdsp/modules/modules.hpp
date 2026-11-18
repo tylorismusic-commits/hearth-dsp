@@ -32,6 +32,7 @@
 #include "du_tape.hpp"
 #include "vbl.hpp"
 #include "hyrax.hpp"
+#include "l2.hpp"
 #include "lmc1.hpp"
 #include "modern_limiter.hpp"
 #include "rs124.hpp"

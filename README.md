@@ -51,6 +51,7 @@ Suite Rack EQ, compressor, colour, gate, transient, clip and de-esser stages.
 | `hdsp/modules/cl1b.hpp` | `CL1B` — JClones optical compressor |
 | `hdsp/modules/du_tape.hpp` | `DuTape` — JClones tape saturator |
 | `hdsp/modules/vbl.hpp` | `VBL` — JClones tube broadcast limiter |
+| `hdsp/modules/l2.hpp` | `L2` — JClones lookahead limiter with IDR dither |
 | `hdsp/modules/motion.hpp` | `Motion`, `MotionControls` — tremolo, auto-pan, rotary |
 | `hdsp/modules/pultec.hpp` | `Pultec`, `PultecControls` — low/high boost and cut |
 | `hdsp/modules/multiband.hpp` | `Multiband`, `MultibandControls` — three-band compressor |
