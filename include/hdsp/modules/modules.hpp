@@ -31,6 +31,7 @@
 #include "hyrax.hpp"
 #include "lmc1.hpp"
 #include "modern_limiter.hpp"
+#include "rs124.hpp"
 #include "motion.hpp"
 #include "pultec.hpp"
 #include "multiband.hpp"

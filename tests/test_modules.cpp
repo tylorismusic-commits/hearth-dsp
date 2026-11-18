@@ -481,6 +481,26 @@ int main() {
     check(finite(w), "Fattener stays finite");
   }
 
+  // RS-124
+  {
+    for (int model = 0; model < 3; ++model) {
+      RS124 rs;
+      rs.prepare(kSr);
+      RS124Controls c;
+      c.model = static_cast<float>(model) * 0.5f;
+      c.input = 0.6f;
+      rs.setControls(c);
+      auto x = tone(1000.0f, 0.9f);
+      float gr = 0.0f;
+      for (int i = 0; i < kN; ++i) {
+        rs.process(x[i], x[i]);
+        gr = std::max(gr, rs.lastGrDb());
+      }
+      check(finite(x), "RS-124 stays finite");
+      check(gr > 0.1f, "RS-124 reports gain reduction");
+    }
+  }
+
   // Bloom
   {
     for (bool split : {false, true}) {
