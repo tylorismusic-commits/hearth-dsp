@@ -270,6 +270,42 @@ int main() {
     check(gr > 0.1f, "multiband reports gain reduction");
   }
 
+  // Rider
+  {
+    Rider rider;
+    rider.prepare(kSr);
+    RiderControls c;
+    c.target = 0.6f;
+    c.speed = 0.5f;
+    c.range = 0.5f;
+    c.mix = 1.0f;
+    rider.setControls(c);
+    auto dry = tone(1000.0f, 0.05f);
+    auto wet = dry;
+    for (int i = 0; i < kN; ++i) rider.process(wet[i], wet[i]);
+    check(finite(wet), "rider stays finite");
+    check(rms(wet, 4000, kN) > rms(dry, 4000, kN) * 1.3,
+          "rider lifts a quiet signal");
+  }
+
+  // Cleanup
+  {
+    Cleanup cleanup;
+    cleanup.prepare(kSr);
+    CleanupControls c;
+    c.declick = 0.0f;
+    c.dehum = 1.0f;
+    c.mains = 0;
+    c.mix = 1.0f;
+    cleanup.setControls(c);
+    auto dry = tone(50.0f);
+    auto wet = dry;
+    for (int i = 0; i < kN; ++i) cleanup.process(wet[i], wet[i]);
+    check(finite(wet), "cleanup stays finite");
+    check(rms(wet, 4000, kN) < rms(dry, 4000, kN) * 0.5,
+          "cleanup notches 50 Hz hum");
+  }
+
   // Filter
   {
     Filter filter;

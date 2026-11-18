@@ -7,6 +7,7 @@
 #pragma once
 
 #include "bleedout.hpp"
+#include "cleanup.hpp"
 #include "clip.hpp"
 #include "colour.hpp"
 #include "crush.hpp"
@@ -22,5 +23,6 @@
 #include "limiter.hpp"
 #include "motion.hpp"
 #include "multiband.hpp"
+#include "rider.hpp"
 #include "sub.hpp"
 #include "transient.hpp"
