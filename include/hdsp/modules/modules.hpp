@@ -28,6 +28,7 @@
 #include "image.hpp"
 #include "limiter.hpp"
 #include "lmc1.hpp"
+#include "modern_limiter.hpp"
 #include "motion.hpp"
 #include "pultec.hpp"
 #include "multiband.hpp"

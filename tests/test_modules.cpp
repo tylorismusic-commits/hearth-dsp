@@ -481,6 +481,24 @@ int main() {
     check(finite(w), "Fattener stays finite");
   }
 
+  // Modern Limiter
+  {
+    ModernLimiter limiter;
+    limiter.prepare(kSr);
+    ModernLimiterControls c;
+    limiter.setControls(c);
+    auto x = tone(1000.0f, 1.0f);
+    float gr = 0.0f;
+    for (int i = 0; i < kN; ++i) {
+      limiter.process(x[i], x[i]);
+      gr = std::max(gr, limiter.lastGrDb());
+    }
+    check(finite(x), "modern limiter stays finite");
+    check(gr > 0.1f, "modern limiter reports gain reduction");
+    check(limiter.latencySamples() > 0,
+          "modern limiter reports lookahead latency");
+  }
+
   // LMC-1
   {
     LMC1 lmc;
