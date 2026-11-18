@@ -14,6 +14,8 @@
 #include "comp/clean.hpp"
 #include "comp/controls.hpp"
 #include "comp/distressor.hpp"
+#include "comp/molot.hpp"
+#include "comp/red.hpp"
 #include "comp/fet.hpp"
 #include "comp/optical.hpp"
 #include "comp/vca.hpp"
@@ -43,6 +45,8 @@ public:
     vca_.prepare(sr_);
     xpress_.prepare(sr_);
     clean_.prepare(sr_);
+    molot_.prepare(sr_);
+    red_.prepare(sr_);
     reset();
   }
 
@@ -112,6 +116,25 @@ public:
         cc.knee = 0.5f;
         clean_.setControls(cc);
         break;
+      case 9:
+        model_ = 9;
+        cc.input = 0.5f;
+        cc.threshold = thr;
+        cc.output = c.makeup;
+        cc.knee = 0.5f;
+        cc.satDrive = 0.35f;
+        cc.stereoMode = 5.0f;
+        cc.satType = 1.0f;
+        molot_.setControls(cc);
+        break;
+      case 10:
+        model_ = 10;
+        cc.input = 0.5f;
+        cc.threshold = thr;
+        cc.output = c.makeup;
+        cc.knee = 0.5f;
+        red_.setControls(cc);
+        break;
       default:
         model_ = 0;
         fetBlue_.setControls(cc);
@@ -130,6 +153,8 @@ public:
       case 3: gr = opto3A_.process(l, r); break;
       case 7: gr = xpress_.process(l, r); break;
       case 8: gr = clean_.process(l, r); break;
+      case 9: gr = molot_.process(l, r); break;
+      case 10: gr = red_.process(l, r); break;
       default: gr = vca_.process(l, r); break;
     }
     if (model_ == 5) {
@@ -153,6 +178,8 @@ public:
     vca_.reset();
     xpress_.reset();
     clean_.reset();
+    molot_.reset();
+    red_.reset();
   }
 
 private:
@@ -174,6 +201,8 @@ private:
   comp::BusVca vca_;
   comp::Distressor xpress_;
   comp::CleanCompressor clean_;
+  comp::MolotCompressor molot_;
+  comp::RedCompressor red_;
 };
 
 } // namespace hdsp::modules

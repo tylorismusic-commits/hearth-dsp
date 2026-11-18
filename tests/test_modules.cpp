@@ -87,7 +87,7 @@ int main() {
   }
 
   // Compressor models
-  for (int model = 0; model <= 8; ++model) {
+  for (int model = 0; model <= 10; ++model) {
     Comp comp;
     comp.prepare(kSr);
     CompControls c;
