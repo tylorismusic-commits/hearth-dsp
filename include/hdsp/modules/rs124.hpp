@@ -29,6 +29,7 @@ public:
   void prepare(float sampleRate) noexcept {
     sr_ = sampleRate > 0.0f ? sampleRate : 48000.0f;
     buildTables();
+    designHpf(8.0f / sr_, 0.7f);
     reset();
     dirty_ = true;
   }
@@ -430,7 +431,6 @@ private:
           std::vector<float>(std::begin(grX[m]), std::end(grX[m])),
           std::vector<float>(std::begin(grY[m]), std::end(grY[m])));
     }
-    designHpf(8.0f / sr_, 0.7f);
   }
 
   static constexpr float kPi = 3.14159265358979323846f;

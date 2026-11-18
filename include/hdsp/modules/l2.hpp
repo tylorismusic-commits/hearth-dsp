@@ -121,7 +121,6 @@ public:
 
     outputGr = moving1_.push(outputGr);
     outputGr = moving2_.push(outputGr);
-    holdMaxGr_ = std::min(holdMaxGr_, outputGr);
 
     l *= inGain;
     r *= inGain;
@@ -149,7 +148,6 @@ public:
     dynamicGrS_ = 1.0f;
     dynamicReleaseG_ = filterG(0.001f);
     dither_.reset();
-    holdMaxGr_ = 1.0f;
     lastGrDb_ = 0.0f;
   }
 
@@ -319,7 +317,6 @@ private:
   float dynamicG1_ = 0.99f, dynamicG2_ = 0.99f, dynamicG3_ = 0.99f;
   float dynamicReleaseG_ = 0.99f;
   float slowGrS_ = 1.0f, fastGrS_ = 1.0f, dynamicGrS_ = 1.0f;
-  float holdMaxGr_ = 1.0f;
   float lastGrDb_ = 0.0f;
 
   DelayLineMin delayMin_;

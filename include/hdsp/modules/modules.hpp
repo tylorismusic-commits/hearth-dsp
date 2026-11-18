@@ -31,6 +31,7 @@
 #include "cl1b.hpp"
 #include "du_tape.hpp"
 #include "vbl.hpp"
+#include "hybrid_eq.hpp"
 #include "hyrax.hpp"
 #include "l2.hpp"
 #include "lmc1.hpp"

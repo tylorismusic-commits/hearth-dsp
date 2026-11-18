@@ -32,6 +32,7 @@ Suite Rack EQ, compressor, colour, gate, transient, clip and de-esser stages.
 
 | Header | Contents |
 |---|---|
+| `hdsp/modules/hybrid_eq.hpp` | `HybridEq` — Helios/Pultec/API/Neve-style hybrid EQ |
 | `hdsp/modules/eq.hpp` | `Eq`, `EqControls` — 4K, Hearth, Tilt and Air voicings |
 | `hdsp/modules/eq510.hpp` | `Eq510`, `Eq510Controls` — fixed-band 510-style EQ |
 | `hdsp/modules/comp.hpp` | `Comp`, `CompControls` — 76 Blue, 76 Black, 2A, 3A and VCA |

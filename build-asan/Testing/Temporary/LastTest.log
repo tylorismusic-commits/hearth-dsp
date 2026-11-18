@@ -1,0 +1,192 @@
+Start testing: Nov 18 07:08 EST
+----------------------------------------------------------
+1/2 Testing: hdsp
+1/2 Test: hdsp
+Command: "/home/tylor/Projects/hearth-dsp/build-asan/hdsp_test"
+Directory: /home/tylor/Projects/hearth-dsp/build-asan
+"hdsp" start time: Nov 18 07:08 EST
+Output:
+----------------------------------------------------------
+PASS  0 dB is unity
+PASS  dB round-trips
+PASS  clamp high
+PASS  clamp low
+PASS  time coefficient in range
+PASS  smoothed converges
+PASS  settleK(0) is instantaneous
+PASS  settleK is a fraction
+PASS  biquad low-pass passes DC
+PASS  biquad high-pass rejects DC
+PASS  one-pole low-pass settles to DC
+PASS  12 dB high-pass rejects DC
+PASS  ratio ladder values
+PASS  ratio step rounds
+PASS  gain computer is 0 below threshold
+PASS  4:1 gives 0.75 dB per dB over threshold
+PASS  soft knee is gentle at threshold
+PASS  ADAA shaper is bounded
+PASS  ADAA shaper with zero drive is a bypass
+PASS  true-peak detector sees the signal
+PASS  oversampler 1x reports 0 samples
+PASS  oversampler 1x passes DC
+PASS  oversampler 1x keeps L/R separate
+PASS  oversampler 1x delay is 0
+PASS  oversampler 2x reports 30 samples
+PASS  oversampler 2x passes DC
+PASS  oversampler 2x keeps L/R separate
+PASS  oversampler 2x delay is 30
+PASS  oversampler 4x reports 45 samples
+PASS  oversampler 4x passes DC
+PASS  oversampler 4x keeps L/R separate
+PASS  oversampler 4x delay is 45
+PASS  three-band crossover sums flat when clean
+PASS  80 Hz sine stays mostly in the low band
+PASS  8 kHz sine stays mostly in the high band
+PASS  four-band crossover sums flat when clean
+PASS  spectrum peaks near 1 kHz (1028 Hz)
+PASS  spectrum peak has a sane level
+PASS  spectrum has no false high-frequency peak
+PASS  spectrum is at the floor for silence
+0 failure(s)
+<end of output>
+Test time =   0.21 sec
+----------------------------------------------------------
+Test Passed.
+"hdsp" end time: Nov 18 07:08 EST
+"hdsp" time elapsed: 00:00:00
+----------------------------------------------------------
+
+2/2 Testing: hdsp_modules
+2/2 Test: hdsp_modules
+Command: "/home/tylor/Projects/hearth-dsp/build-asan/hdsp_modules_test"
+Directory: /home/tylor/Projects/hearth-dsp/build-asan
+"hdsp_modules" start time: Nov 18 07:08 EST
+Output:
+----------------------------------------------------------
+/home/tylor/Projects/hearth-dsp/include/hdsp/modules/l2.hpp:255:36: runtime error: signed integer overflow: -2046857557 + -2079585324 cannot be represented in type 'int'
+/home/tylor/Projects/hearth-dsp/include/hdsp/modules/l2.hpp:256:36: runtime error: signed integer overflow: -1302165485 - 2005427708 cannot be represented in type 'int'
+PASS  EQ stays finite
+PASS  EQ high-pass removes low tone
+PASS  EQ voicing stays finite
+PASS  EQ voicing stays finite
+PASS  EQ voicing stays finite
+PASS  EQ voicing stays finite
+PASS  compressor stays finite
+PASS  compressor reports gain reduction
+PASS  compressor model stays finite
+PASS  compressor model stays finite
+PASS  compressor model stays finite
+PASS  compressor model stays finite
+PASS  compressor model stays finite
+PASS  compressor model stays finite
+PASS  compressor model stays finite
+PASS  compressor model stays finite
+PASS  compressor model stays finite
+PASS  compressor model stays finite
+PASS  compressor model stays finite
+PASS  colour model stays finite
+PASS  colour model stays finite
+PASS  colour model stays finite
+PASS  colour model stays finite
+PASS  colour model stays finite
+PASS  gate stays finite
+PASS  gate attenuates a low-level signal
+PASS  Bleed Out stays finite
+PASS  Bleed Out reports lookahead latency
+PASS  transient stays finite
+PASS  clip stays finite
+PASS  clip bounds the output
+PASS  density stays finite
+PASS  image width expands the side signal
+PASS  crush stays finite
+PASS  crush quantizes the signal
+PASS  sub stays finite
+PASS  sub adds a subharmonic component
+PASS  double stays finite
+PASS  double adds a delayed copy
+PASS  dynamic EQ stays finite
+PASS  dynamic EQ reports gain reduction
+PASS  multiband stays finite
+PASS  multiband reports gain reduction
+PASS  ember stays finite
+PASS  reel stays finite
+PASS  reel reports transport latency
+PASS  rider stays finite
+PASS  rider lifts a quiet signal
+PASS  cleanup stays finite
+PASS  cleanup notches 50 Hz hum
+PASS  space reverb stays finite
+PASS  space delay stays finite
+PASS  space modulation stays finite
+PASS  tame stays finite
+PASS  510 EQ stays finite
+PASS  510 EQ high-pass removes low tone
+PASS  Pultec stays finite
+PASS  Pultec low boost lifts low tone
+PASS  filter stays finite
+PASS  auto-pan moves the stereo image
+PASS  TapeHead stays finite
+PASS  TubeDriver stays finite
+PASS  DaTube stays finite
+PASS  Fattener stays finite
+PASS  VBL stays finite
+PASS  VBL reports gain reduction
+PASS  DuTape stays finite
+PASS  DuTape stays finite
+PASS  DuTape stays finite
+PASS  DuTape stays finite
+PASS  DuTape stays finite
+PASS  DuTape stays finite
+PASS  CL-1B stays finite
+PASS  CL-1B reports gain reduction
+PASS  CL-1B stays finite
+PASS  CL-1B reports gain reduction
+PASS  CL-1B stays finite
+PASS  CL-1B reports gain reduction
+PASS  RS-124 stays finite
+PASS  RS-124 reports gain reduction
+PASS  RS-124 stays finite
+PASS  RS-124 reports gain reduction
+PASS  RS-124 stays finite
+PASS  RS-124 reports gain reduction
+PASS  Bloom stays finite
+PASS  Bloom split stays finite
+PASS  O3 stays finite
+PASS  O3 reports gain reduction
+PASS  O3 reports latency
+PASS  O3 stays finite
+PASS  O3 reports gain reduction
+PASS  O3 reports latency
+PASS  L2 stays finite
+PASS  L2 reports gain reduction
+PASS  L2 reports lookahead latency
+PASS  L2 stays finite
+PASS  L2 reports gain reduction
+PASS  L2 reports lookahead latency
+PASS  Hyrax stays finite
+PASS  Hyrax reports gain reduction
+PASS  Hyrax reports latency
+PASS  modern limiter stays finite
+PASS  modern limiter reports gain reduction
+PASS  modern limiter reports lookahead latency
+PASS  LMC-1 stays finite
+PASS  AC-1 stays finite
+PASS  classic limiter stays finite
+PASS  classic limiter reports gain reduction
+PASS  classic limiter reports lookahead latency
+PASS  limiter stays finite
+PASS  limiter reports gain reduction
+PASS  limiter reports lookahead latency
+PASS  limiter keeps the output bounded
+PASS  de-esser stays finite
+PASS  de-esser reports gain reduction
+0 failure(s)
+<end of output>
+Test time =   3.23 sec
+----------------------------------------------------------
+Test Passed.
+"hdsp_modules" end time: Nov 18 07:08 EST
+"hdsp_modules" time elapsed: 00:00:03
+----------------------------------------------------------
+
+End testing: Nov 18 07:08 EST

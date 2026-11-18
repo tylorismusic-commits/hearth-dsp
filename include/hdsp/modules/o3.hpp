@@ -166,20 +166,23 @@ private:
     float maxValue = std::max(std::fabs(y0L), std::fabs(y0R));
 
     if (preventIsp_) {
-      float phase[5] = {0, 0, 0, 0, 0};
+      float sumL[5] = {0, 0, 0, 0, 0};
+      float sumR[5] = {0, 0, 0, 0, 0};
       int j = 0;
       for (int i = 0; i < kUpsampleLen; ++i) {
         const float xl = upBufL_[static_cast<size_t>(upHead_ + i)];
         const float xr = upBufR_[static_cast<size_t>(upHead_ + i)];
         for (int p = 0; p < 5; ++p) {
           const float ir = kUpsampleIr[j + p];
-          phase[p] = std::max(
-              phase[p],
-              std::max(std::fabs(xl * ir), std::fabs(xr * ir)));
+          sumL[p] += xl * ir;
+          sumR[p] += xr * ir;
         }
         j += 5;
       }
-      for (float v : phase) maxValue = std::max(maxValue, v);
+      for (int p = 0; p < 5; ++p) {
+        maxValue = std::max(maxValue,
+                            std::max(std::fabs(sumL[p]), std::fabs(sumR[p])));
+      }
     }
     return maxValue;
   }

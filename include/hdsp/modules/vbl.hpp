@@ -423,7 +423,6 @@ private:
   };
 
   void setTrafo(bool on) noexcept {
-    trafoOn_ = on;
     const float hpfFreqK = (on ? 19.0f : 6.4f) / sr_;
     const float cw = std::cos(2.0f * kPi * hpfFreqK);
     hpfK_ = cw - std::sqrt(cw * cw - 4.0f * cw + 3.0f);
@@ -457,7 +456,6 @@ private:
   float compDb_ = 0.0f, emphasisK_ = 0.5f, biasK_ = 0.5f, ampK_ = 0.0f;
   float brillianceK_ = 0.0f, dryMixK_ = 0.0f;
   bool dirty_ = true;
-  bool trafoOn_ = true;
 
   float c1_ = 0, c2_ = 0, c3_ = 0;
   float crossoverK_ = 0.3f, compGrFilter1K_ = 0.01f, attackLoK_ = 0.99f,

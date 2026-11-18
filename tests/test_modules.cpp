@@ -557,6 +557,22 @@ int main() {
     }
   }
 
+  // Hybrid EQ
+  {
+    HybridEq eq;
+    eq.prepare(kSr);
+    HybridEqControls c;
+    c.lowCut = 0.35f;
+    c.lowBoost = 0.5f;
+    c.midGain = 0.8f;
+    c.highBoost = 0.4f;
+    c.highAtten = 0.3f;
+    eq.setControls(c);
+    auto x = tone(1000.0f, 0.5f);
+    for (int i = 0; i < kN; ++i) eq.process(x[i], x[i]);
+    check(finite(x), "Hybrid EQ stays finite");
+  }
+
   // Bloom
   {
     for (bool split : {false, true}) {
