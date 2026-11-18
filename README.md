@@ -33,6 +33,7 @@ Suite Rack EQ, compressor, colour, gate, transient, clip and de-esser stages.
 | Header | Contents |
 |---|---|
 | `hdsp/modules/eq.hpp` | `Eq`, `EqControls` — 4K, Hearth, Tilt and Air voicings |
+| `hdsp/modules/eq510.hpp` | `Eq510`, `Eq510Controls` — fixed-band 510-style EQ |
 | `hdsp/modules/comp.hpp` | `Comp`, `CompControls` — 76 Blue, 76 Black, 2A, 3A and VCA |
 | `hdsp/modules/comp/` | FET, optical and VCA model implementations |
 | `hdsp/modules/colour.hpp` | `Colour`, `ColourControls` — Valve, Console, Bus, Tape, Transformer |
@@ -43,6 +44,7 @@ Suite Rack EQ, compressor, colour, gate, transient, clip and de-esser stages.
 | `hdsp/modules/gate.hpp` | `Gate`, `GateControls` |
 | `hdsp/modules/limiter.hpp` | `Limiter`, `LimiterControls` — lookahead peak limiter |
 | `hdsp/modules/motion.hpp` | `Motion`, `MotionControls` — tremolo, auto-pan, rotary |
+| `hdsp/modules/pultec.hpp` | `Pultec`, `PultecControls` — low/high boost and cut |
 | `hdsp/modules/multiband.hpp` | `Multiband`, `MultibandControls` — three-band compressor |
 | `hdsp/modules/reel.hpp` | `Reel`, `ReelControls` — reel/cassette tape stage |
 | `hdsp/modules/rider.hpp` | `Rider`, `RiderControls` — auto-level / vocal rider |

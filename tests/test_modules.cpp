@@ -382,6 +382,36 @@ int main() {
     check(finite(x), "tame stays finite");
   }
 
+  // 510 EQ
+  {
+    Eq510 eq;
+    eq.prepare(kSr);
+    Eq510Controls c;
+    c.hpf = 1.0f;
+    eq.setControls(c);
+    auto dry = tone(100.0f);
+    auto wet = dry;
+    for (int i = 0; i < kN; ++i) eq.process(wet[i], wet[i]);
+    check(finite(wet), "510 EQ stays finite");
+    check(rms(wet, 2000, kN) < rms(dry, 2000, kN) * 0.5,
+          "510 EQ high-pass removes low tone");
+  }
+
+  // Pultec EQ
+  {
+    Pultec eq;
+    eq.prepare(kSr);
+    PultecControls c;
+    c.lowBoost = 1.0f;
+    eq.setControls(c);
+    auto dry = tone(100.0f);
+    auto wet = dry;
+    for (int i = 0; i < kN; ++i) eq.process(wet[i], wet[i]);
+    check(finite(wet), "Pultec stays finite");
+    check(rms(wet, 2000, kN) > rms(dry, 2000, kN) * 1.1,
+          "Pultec low boost lifts low tone");
+  }
+
   // Filter
   {
     Filter filter;
