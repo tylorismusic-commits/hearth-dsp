@@ -14,3 +14,4 @@
 #include "hdsp/spectrum.hpp"
 #include "hdsp/truepeak.hpp"
 #include "hdsp/util.hpp"
+#include "hdsp/modules/modules.hpp"

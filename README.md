@@ -1,10 +1,12 @@
 # hearth-dsp
 
-Header-only DSP modules shared by Comp Suite and future plugins. GPL-3.0-or-later.
+Header-only DSP modules shared by Comp Suite, Suite Rack and future plugins.
+GPL-3.0-or-later.
 
 Extracted from Comp Suite 1.0.0 so the hard-won pieces — ADAA saturation,
 per-channel oversampling, the ratio ladder — live in one place instead of
-being copied into every plugin.
+being copied into every plugin. The shared processor modules now include the
+Suite Rack EQ, compressor, colour, gate, transient, clip and de-esser stages.
 
 ## Modules
 
@@ -26,7 +28,22 @@ being copied into every plugin.
 | `hdsp/truepeak.hpp` | 4× Catmull-Rom `TruePeakDetector` |
 | `hdsp/oversample.hpp` | Off/2×/4× half-band `Oversampler` |
 
-`hdsp/hdsp.hpp` includes all of them.
+### Processor modules
+
+| Header | Contents |
+|---|---|
+| `hdsp/modules/eq.hpp` | `Eq`, `EqControls` — 4K, Hearth, Tilt and Air voicings |
+| `hdsp/modules/comp.hpp` | `Comp`, `CompControls` — 76 Blue, 76 Black, 2A, 3A and VCA |
+| `hdsp/modules/comp/` | FET, optical and VCA model implementations |
+| `hdsp/modules/colour.hpp` | `Colour`, `ColourControls` — Valve, Console, Bus, Tape, Transformer |
+| `hdsp/modules/gate.hpp` | `Gate`, `GateControls` |
+| `hdsp/modules/transient.hpp` | `Transient`, `TransientControls` |
+| `hdsp/modules/clip.hpp` | `Clip`, `ClipControls` |
+| `hdsp/modules/deess.hpp` | `DeEss`, `DeEssControls` |
+
+`hdsp/hdsp.hpp` includes both the primitives and the processor modules. The
+modules expose small typed control structs rather than plugin-specific
+parameter IDs, so a plugin maps its own controls onto them.
 
 ## Usage
 
@@ -63,7 +80,8 @@ ctest --test-dir build --output-on-failure
 
 The tests cover DC unity, latency, left/right isolation (the regression that
 caused a right-side buzz in Comp Suite), biquad responses, ADAA bounds, the
-gain computer, smoothing and true-peak detection.
+gain computer, smoothing, true-peak detection and the shared processor
+modules.
 
 ## Provenance
 
