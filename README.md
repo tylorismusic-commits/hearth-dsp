@@ -40,6 +40,7 @@ Suite Rack EQ, compressor, colour, gate, transient, clip and de-esser stages.
 | `hdsp/modules/transient.hpp` | `Transient`, `TransientControls` |
 | `hdsp/modules/clip.hpp` | `Clip`, `ClipControls` |
 | `hdsp/modules/deess.hpp` | `DeEss`, `DeEssControls` |
+| `hdsp/modules/density.hpp` | `Density`, `DensityControls` |
 
 `hdsp/hdsp.hpp` includes both the primitives and the processor modules. The
 modules expose small typed control structs rather than plugin-specific

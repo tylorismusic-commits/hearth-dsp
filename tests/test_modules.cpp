@@ -144,6 +144,17 @@ int main() {
     check(peak < 0.5f, "clip bounds the output");
   }
 
+  // Harmonic density
+  {
+    Density density;
+    density.prepare(kSr);
+    DensityControls c;
+    density.setControls(c);
+    auto x = tone(1000.0f);
+    for (int i = 0; i < kN; ++i) density.process(x[i], x[i]);
+    check(finite(x), "density stays finite");
+  }
+
   // De-esser
   {
     DeEss deess;

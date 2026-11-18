@@ -10,6 +10,7 @@
 #include "colour.hpp"
 #include "comp.hpp"
 #include "deess.hpp"
+#include "density.hpp"
 #include "eq.hpp"
 #include "gate.hpp"
 #include "transient.hpp"
