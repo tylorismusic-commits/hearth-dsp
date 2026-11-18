@@ -1,7 +1,0 @@
-{
-	"InstallScripts" : 
-	[
-		"/home/tylor/Projects/hearth-dsp/build-asan/cmake_install.cmake"
-	],
-	"Parallel" : false
-}
