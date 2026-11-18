@@ -446,6 +446,41 @@ int main() {
     check(std::fabs(l - r) > 0.01f, "auto-pan moves the stereo image");
   }
 
+  // JClones saturation ports
+  {
+    TapeHead tape;
+    tape.prepare(kSr);
+    TapeHeadControls tc;
+    tape.setControls(tc);
+    auto x = tone(1000.0f);
+    for (int i = 0; i < kN; ++i) tape.process(x[i], x[i]);
+    check(finite(x), "TapeHead stays finite");
+
+    TubeDriver tube;
+    tube.prepare(kSr);
+    TubeDriverControls uc;
+    tube.setControls(uc);
+    auto y = tone(1000.0f);
+    for (int i = 0; i < kN; ++i) tube.process(y[i], y[i]);
+    check(finite(y), "TubeDriver stays finite");
+
+    DaTube da;
+    da.prepare(kSr);
+    DaTubeControls dc;
+    da.setControls(dc);
+    auto z = tone(1000.0f);
+    for (int i = 0; i < kN; ++i) da.process(z[i], z[i]);
+    check(finite(z), "DaTube stays finite");
+
+    Fattener fattener;
+    fattener.prepare(kSr);
+    FattenerControls fc;
+    fattener.setControls(fc);
+    auto w = tone(1000.0f);
+    for (int i = 0; i < kN; ++i) fattener.process(w[i], w[i]);
+    check(finite(w), "Fattener stays finite");
+  }
+
   // Classic Limiter
   {
     ClassicLimiter limiter;

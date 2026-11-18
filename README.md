@@ -52,10 +52,14 @@ Suite Rack EQ, compressor, colour, gate, transient, clip and de-esser stages.
 | `hdsp/modules/space/` | Space Suite reverb, delay and modulation engines |
 | `hdsp/modules/sub.hpp` | `Sub`, `SubControls` — subharmonic synthesizer |
 | `hdsp/modules/tame.hpp` | `Tame`, `TameControls` — Trowel resonance suppressor |
+| `hdsp/modules/tapehead.hpp` | `TapeHead` — tape saturation |
+| `hdsp/modules/tubedriver.hpp` | `TubeDriver` — tube saturation |
 | `hdsp/modules/transient.hpp` | `Transient`, `TransientControls` |
 | `hdsp/modules/classic_limiter.hpp` | `ClassicLimiter` — JClones-derived limiter |
 | `hdsp/modules/cleanup.hpp` | `Cleanup`, `CleanupControls` — de-click / de-hum |
 | `hdsp/modules/clip.hpp` | `Clip`, `ClipControls` |
+| `hdsp/modules/datube.hpp` | `DaTube` — tube saturation |
+| `hdsp/modules/fattener.hpp` | `Fattener` — soft clipper / enhancer |
 | `hdsp/modules/deess.hpp` | `DeEss`, `DeEssControls` |
 | `hdsp/modules/double.hpp` | `Double`, `DoubleControls` — doubler / microshift |
 | `hdsp/modules/dynamiceq.hpp` | `DynamicEq`, `DynamicEqControls` — single-band dynamic EQ |
