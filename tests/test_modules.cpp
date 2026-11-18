@@ -306,6 +306,34 @@ int main() {
           "cleanup notches 50 Hz hum");
   }
 
+  // Space wrappers
+  {
+    SpaceReverb reverb;
+    reverb.prepare(kSr);
+    SpaceReverbControls c;
+    c.mode = 0;
+    reverb.setControls(c);
+    auto x = tone(500.0f, 0.1f);
+    for (int i = 0; i < kN; ++i) reverb.process(x[i], x[i]);
+    check(finite(x), "space reverb stays finite");
+
+    SpaceDelay delay;
+    delay.prepare(kSr);
+    SpaceDelayControls dc;
+    delay.setControls(dc);
+    auto y = tone(500.0f, 0.1f);
+    for (int i = 0; i < kN; ++i) delay.process(y[i], y[i]);
+    check(finite(y), "space delay stays finite");
+
+    SpaceMod mod;
+    mod.prepare(kSr);
+    SpaceModControls mc;
+    mod.setControls(mc);
+    auto z = tone(500.0f, 0.1f);
+    for (int i = 0; i < kN; ++i) mod.process(z[i], z[i]);
+    check(finite(z), "space modulation stays finite");
+  }
+
   // Filter
   {
     Filter filter;

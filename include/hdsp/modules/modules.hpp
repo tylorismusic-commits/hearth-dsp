@@ -24,5 +24,6 @@
 #include "motion.hpp"
 #include "multiband.hpp"
 #include "rider.hpp"
+#include "space.hpp"
 #include "sub.hpp"
 #include "transient.hpp"
