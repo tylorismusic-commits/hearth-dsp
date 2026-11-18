@@ -481,6 +481,17 @@ int main() {
     check(finite(w), "Fattener stays finite");
   }
 
+  // AC-1
+  {
+    AC1 ac1;
+    ac1.prepare(kSr);
+    AC1Controls c;
+    ac1.setControls(c);
+    auto x = tone(1000.0f);
+    for (int i = 0; i < kN; ++i) ac1.process(x[i], x[i]);
+    check(finite(x), "AC-1 stays finite");
+  }
+
   // Classic Limiter
   {
     ClassicLimiter limiter;

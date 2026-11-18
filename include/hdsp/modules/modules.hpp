@@ -9,6 +9,7 @@
 #include "bleedout.hpp"
 #include "classic_limiter.hpp"
 #include "cleanup.hpp"
+#include "ac1.hpp"
 #include "clip.hpp"
 #include "colour.hpp"
 #include "crush.hpp"

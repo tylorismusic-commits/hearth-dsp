@@ -55,6 +55,7 @@ Suite Rack EQ, compressor, colour, gate, transient, clip and de-esser stages.
 | `hdsp/modules/tapehead.hpp` | `TapeHead` — tape saturation |
 | `hdsp/modules/tubedriver.hpp` | `TubeDriver` — tube saturation |
 | `hdsp/modules/transient.hpp` | `Transient`, `TransientControls` |
+| `hdsp/modules/ac1.hpp` | `AC1` — JClones console channel |
 | `hdsp/modules/classic_limiter.hpp` | `ClassicLimiter` — JClones-derived limiter |
 | `hdsp/modules/cleanup.hpp` | `Cleanup`, `CleanupControls` — de-click / de-hum |
 | `hdsp/modules/clip.hpp` | `Clip`, `ClipControls` |
