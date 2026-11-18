@@ -44,6 +44,7 @@ Suite Rack EQ, compressor, colour, gate, transient, clip and de-esser stages.
 | `hdsp/modules/limiter.hpp` | `Limiter`, `LimiterControls` — lookahead peak limiter |
 | `hdsp/modules/motion.hpp` | `Motion`, `MotionControls` — tremolo, auto-pan, rotary |
 | `hdsp/modules/multiband.hpp` | `Multiband`, `MultibandControls` — three-band compressor |
+| `hdsp/modules/reel.hpp` | `Reel`, `ReelControls` — reel/cassette tape stage |
 | `hdsp/modules/rider.hpp` | `Rider`, `RiderControls` — auto-level / vocal rider |
 | `hdsp/modules/space.hpp` | `SpaceReverb`, `SpaceDelay`, `SpaceMod` wrappers |
 | `hdsp/modules/space/` | Space Suite reverb, delay and modulation engines |

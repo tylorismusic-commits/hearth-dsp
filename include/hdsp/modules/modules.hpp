@@ -23,6 +23,7 @@
 #include "limiter.hpp"
 #include "motion.hpp"
 #include "multiband.hpp"
+#include "reel.hpp"
 #include "rider.hpp"
 #include "space.hpp"
 #include "sub.hpp"

@@ -282,6 +282,18 @@ int main() {
     check(gr > 0.1f, "multiband reports gain reduction");
   }
 
+  // Reel
+  {
+    Reel reel;
+    reel.prepare(kSr);
+    ReelControls c;
+    reel.setControls(c);
+    auto x = tone(1000.0f);
+    for (int i = 0; i < kN; ++i) reel.process(x[i], x[i]);
+    check(finite(x), "reel stays finite");
+    check(reel.latencySamples() > 0, "reel reports transport latency");
+  }
+
   // Rider
   {
     Rider rider;
