@@ -171,6 +171,29 @@ int main() {
     check(finite(x), "density stays finite");
   }
 
+  // Peak limiter
+  {
+    Limiter limiter;
+    limiter.prepare(kSr);
+    LimiterControls c;
+    c.input = 1.0f;
+    c.ceiling = 0.4f;
+    c.release = 0.5f;
+    limiter.setControls(c);
+    auto x = tone(1000.0f, 1.5f);
+    float gr = 0.0f;
+    for (int i = 0; i < kN; ++i) {
+      limiter.process(x[i], x[i]);
+      gr = std::max(gr, limiter.lastGrDb());
+    }
+    float peak = 0.0f;
+    for (float v : x) peak = std::max(peak, std::fabs(v));
+    check(finite(x), "limiter stays finite");
+    check(gr > 0.1f, "limiter reports gain reduction");
+    check(limiter.latencySamples() > 0, "limiter reports lookahead latency");
+    check(peak < 1.0f, "limiter keeps the output bounded");
+  }
+
   // De-esser
   {
     DeEss deess;

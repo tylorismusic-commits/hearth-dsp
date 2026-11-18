@@ -14,4 +14,5 @@
 #include "density.hpp"
 #include "eq.hpp"
 #include "gate.hpp"
+#include "limiter.hpp"
 #include "transient.hpp"

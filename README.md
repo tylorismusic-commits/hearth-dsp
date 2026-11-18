@@ -38,6 +38,7 @@ Suite Rack EQ, compressor, colour, gate, transient, clip and de-esser stages.
 | `hdsp/modules/colour.hpp` | `Colour`, `ColourControls` — Valve, Console, Bus, Tape, Transformer |
 | `hdsp/modules/bleedout.hpp` | `BleedOut`, `BleedOutControls` — multiband de-bleed gate |
 | `hdsp/modules/gate.hpp` | `Gate`, `GateControls` |
+| `hdsp/modules/limiter.hpp` | `Limiter`, `LimiterControls` — lookahead peak limiter |
 | `hdsp/modules/transient.hpp` | `Transient`, `TransientControls` |
 | `hdsp/modules/clip.hpp` | `Clip`, `ClipControls` |
 | `hdsp/modules/deess.hpp` | `DeEss`, `DeEssControls` |
