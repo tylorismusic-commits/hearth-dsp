@@ -29,6 +29,7 @@
 #include "limiter.hpp"
 #include "bloom.hpp"
 #include "cl1b.hpp"
+#include "du_tape.hpp"
 #include "hyrax.hpp"
 #include "lmc1.hpp"
 #include "modern_limiter.hpp"

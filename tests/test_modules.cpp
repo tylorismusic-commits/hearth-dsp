@@ -481,6 +481,21 @@ int main() {
     check(finite(w), "Fattener stays finite");
   }
 
+  // DuTape
+  {
+    for (int model = 0; model < 6; ++model) {
+      DuTape tape;
+      tape.prepare(kSr);
+      DuTapeControls c;
+      c.machine = model;
+      c.input = 0.85f;
+      tape.setControls(c);
+      auto x = tone(1000.0f, 0.9f);
+      for (int i = 0; i < kN; ++i) tape.process(x[i], x[i]);
+      check(finite(x), "DuTape stays finite");
+    }
+  }
+
   // CL-1B
   {
     for (int mode = 0; mode < 3; ++mode) {
