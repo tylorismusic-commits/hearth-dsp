@@ -7,6 +7,7 @@
 #pragma once
 
 #include "bleedout.hpp"
+#include "classic_limiter.hpp"
 #include "cleanup.hpp"
 #include "clip.hpp"
 #include "colour.hpp"

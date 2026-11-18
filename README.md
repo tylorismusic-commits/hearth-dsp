@@ -53,6 +53,7 @@ Suite Rack EQ, compressor, colour, gate, transient, clip and de-esser stages.
 | `hdsp/modules/sub.hpp` | `Sub`, `SubControls` — subharmonic synthesizer |
 | `hdsp/modules/tame.hpp` | `Tame`, `TameControls` — Trowel resonance suppressor |
 | `hdsp/modules/transient.hpp` | `Transient`, `TransientControls` |
+| `hdsp/modules/classic_limiter.hpp` | `ClassicLimiter` — JClones-derived limiter |
 | `hdsp/modules/cleanup.hpp` | `Cleanup`, `CleanupControls` — de-click / de-hum |
 | `hdsp/modules/clip.hpp` | `Clip`, `ClipControls` |
 | `hdsp/modules/deess.hpp` | `DeEss`, `DeEssControls` |

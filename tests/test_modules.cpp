@@ -446,6 +446,25 @@ int main() {
     check(std::fabs(l - r) > 0.01f, "auto-pan moves the stereo image");
   }
 
+  // Classic Limiter
+  {
+    ClassicLimiter limiter;
+    limiter.prepare(kSr);
+    ClassicLimiterControls c;
+    c.threshold = 0.75f;
+    limiter.setControls(c);
+    auto x = tone(1000.0f, 1.0f);
+    float gr = 0.0f;
+    for (int i = 0; i < kN; ++i) {
+      limiter.process(x[i], x[i]);
+      gr = std::max(gr, limiter.lastGrDb());
+    }
+    check(finite(x), "classic limiter stays finite");
+    check(gr > 0.1f, "classic limiter reports gain reduction");
+    check(limiter.latencySamples() > 0,
+          "classic limiter reports lookahead latency");
+  }
+
   // Peak limiter
   {
     Limiter limiter;
