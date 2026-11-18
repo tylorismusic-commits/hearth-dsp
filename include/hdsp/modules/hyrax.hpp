@@ -8,8 +8,6 @@
 
 #include <algorithm>
 #include <cmath>
-#include <cstdint>
-#include <deque>
 #include <vector>
 
 #include <hdsp/db.hpp>
@@ -85,26 +83,27 @@ private:
   };
 
   struct SlidingMax {
-    std::deque<std::pair<uint64_t, float>> dq;
-    uint64_t counter = 0;
+    std::vector<float> buffer;
+    int head = 0;
     int window = 1;
     void prepare(int w) noexcept {
       window = std::max(1, w);
+      buffer.assign(static_cast<size_t>(window), 1.0f);
       reset();
     }
     void reset() noexcept {
-      dq.clear();
-      counter = 0;
+      std::fill(buffer.begin(), buffer.end(), 1.0f);
+      head = 0;
     }
     void push(float v) noexcept {
-      while (!dq.empty() && dq.back().second <= v) dq.pop_back();
-      dq.emplace_back(counter, v);
-      while (!dq.empty() && dq.front().first + static_cast<uint64_t>(window) <= counter) {
-        dq.pop_front();
-      }
-      ++counter;
+      buffer[static_cast<size_t>(head)] = v;
+      head = (head + 1) % window;
     }
-    float max() const noexcept { return dq.empty() ? 0.0f : dq.front().second; }
+    float max() const noexcept {
+      float m = buffer[0];
+      for (float v : buffer) m = std::max(m, v);
+      return m;
+    }
   };
 
   struct DelayLine {
