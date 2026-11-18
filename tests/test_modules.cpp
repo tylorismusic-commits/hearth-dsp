@@ -117,6 +117,22 @@ int main() {
           "gate attenuates a low-level signal");
   }
 
+  // Bleed Out
+  {
+    BleedOut bleed;
+    bleed.prepare(kSr);
+    BleedOutControls c;
+    c.profile = 1;
+    c.threshold = 0.5f;
+    c.deBleed = 0.8f;
+    c.ghost = 0.5f;
+    bleed.setControls(c);
+    auto x = tone(1000.0f);
+    for (int i = 0; i < kN; ++i) bleed.process(x[i], x[i]);
+    check(finite(x), "Bleed Out stays finite");
+    check(bleed.latencySamples() > 0, "Bleed Out reports lookahead latency");
+  }
+
   // Transient and clip
   {
     Transient transient;

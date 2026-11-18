@@ -6,6 +6,7 @@
 // controls struct, so a plugin can map it to its own parameter model.
 #pragma once
 
+#include "bleedout.hpp"
 #include "clip.hpp"
 #include "colour.hpp"
 #include "comp.hpp"
