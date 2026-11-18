@@ -481,6 +481,26 @@ int main() {
     check(finite(w), "Fattener stays finite");
   }
 
+  // CL-1B
+  {
+    for (int mode = 0; mode < 3; ++mode) {
+      CL1B cl;
+      cl.prepare(kSr);
+      CL1BControls c;
+      c.mode = mode;
+      c.ratio = 0.6f;
+      cl.setControls(c);
+      auto x = tone(1000.0f, 0.9f);
+      float gr = 0.0f;
+      for (int i = 0; i < kN; ++i) {
+        cl.process(x[i], x[i]);
+        gr = std::max(gr, cl.lastGrDb());
+      }
+      check(finite(x), "CL-1B stays finite");
+      check(gr > 0.1f, "CL-1B reports gain reduction");
+    }
+  }
+
   // RS-124
   {
     for (int model = 0; model < 3; ++model) {

@@ -28,6 +28,7 @@
 #include "image.hpp"
 #include "limiter.hpp"
 #include "bloom.hpp"
+#include "cl1b.hpp"
 #include "hyrax.hpp"
 #include "lmc1.hpp"
 #include "modern_limiter.hpp"
