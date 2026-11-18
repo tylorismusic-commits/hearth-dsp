@@ -235,8 +235,7 @@ private:
       return static_cast<int32_t>(state);
     }
 
-    float shape(float in, const float* history, int shaping,
-                int srIndex) noexcept {
+    float shape(const float* history, int shaping, int srIndex) noexcept {
       const float* ir = kDitherTable + 9 * (shaping + 4 * srIndex);
       float filtered = 0.0f;
       int i = index;
@@ -263,8 +262,8 @@ private:
         r2R = type2A - type2B;
       }
 
-      const float filteredL = shape(l, historyL, shaping, srIndex);
-      const float filteredR = shape(r, historyR, shaping, srIndex);
+      const float filteredL = shape(historyL, shaping, srIndex);
+      const float filteredR = shape(historyR, shaping, srIndex);
 
       auto convert = [&](float in, float filtered, float rand1,
                          float rand2) {
