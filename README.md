@@ -46,6 +46,7 @@ Suite Rack EQ, compressor, colour, gate, transient, clip and de-esser stages.
 | `hdsp/modules/lmc1.hpp` | `LMC1` — JClones console compressor |
 | `hdsp/modules/modern_limiter.hpp` | `ModernLimiter` — JClones lookahead limiter |
 | `hdsp/modules/hyrax.hpp` | `Hyrax` — JClones linear-phase brickwall limiter |
+| `hdsp/modules/bloom.hpp` | `Bloom` — JClones harmonic enhancer |
 | `hdsp/modules/motion.hpp` | `Motion`, `MotionControls` — tremolo, auto-pan, rotary |
 | `hdsp/modules/pultec.hpp` | `Pultec`, `PultecControls` — low/high boost and cut |
 | `hdsp/modules/multiband.hpp` | `Multiband`, `MultibandControls` — three-band compressor |

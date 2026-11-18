@@ -481,6 +481,21 @@ int main() {
     check(finite(w), "Fattener stays finite");
   }
 
+  // Bloom
+  {
+    for (bool split : {false, true}) {
+      Bloom bloom;
+      bloom.prepare(kSr);
+      BloomControls c;
+      c.effect = 0.7f;
+      c.bandSplit = split;
+      bloom.setControls(c);
+      auto x = tone(1000.0f, 0.8f);
+      for (int i = 0; i < kN; ++i) bloom.process(x[i], x[i]);
+      check(finite(x), split ? "Bloom split stays finite" : "Bloom stays finite");
+    }
+  }
+
   // Hyrax
   {
     Hyrax hyrax;
