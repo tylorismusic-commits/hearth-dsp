@@ -24,6 +24,7 @@ struct BleedOutControls {
   float threshold = 0.50f;  // 0..1 -> -60..0 dB
   float deBleed = 0.70f;    // 0..1 -> 0..100
   float ghost = 0.75f;      // 0..1 -> 0..100
+  bool ghostEnabled = true;
 };
 
 struct BleedOutMeters {
@@ -153,7 +154,7 @@ public:
     d.thresholdDb = -60.0f + 60.0f * std::clamp(c.threshold, 0.0f, 1.0f);
     d.deBleed = std::clamp(c.deBleed, 0.0f, 1.0f) * 100.0f;
     d.ghost = std::clamp(c.ghost, 0.0f, 1.0f) * 100.0f;
-    d.ghostMode = d.ghost > 0.0f;
+    d.ghostMode = c.ghostEnabled && d.ghost > 0.0f;
     d.ghostNote = 38;
     d.ghostCc = 74;
     d.ghostTrigger = 0;
