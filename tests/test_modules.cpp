@@ -370,6 +370,18 @@ int main() {
     check(finite(z), "space modulation stays finite");
   }
 
+  // Tame
+  {
+    Tame tame;
+    tame.prepare(kSr);
+    TameControls c;
+    c.amount = 1.0f;
+    tame.setControls(c);
+    auto x = tone(1000.0f);
+    for (int i = 0; i < kN; ++i) tame.process(x[i], x[i]);
+    check(finite(x), "tame stays finite");
+  }
+
   // Filter
   {
     Filter filter;

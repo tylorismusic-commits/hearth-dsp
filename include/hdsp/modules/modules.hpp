@@ -28,4 +28,5 @@
 #include "rider.hpp"
 #include "space.hpp"
 #include "sub.hpp"
+#include "tame.hpp"
 #include "transient.hpp"
