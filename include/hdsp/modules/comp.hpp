@@ -32,6 +32,7 @@ struct CompControls {
   float mix = 1.00f;
   float scHpf = 0.05f;
   float distortion = 0.00f;  // Xpress only
+  bool externalSidechain = false;
 };
 
 class Comp {
@@ -67,6 +68,7 @@ public:
     cc.makeup = c.makeup;
     cc.output = 0.5f;
     cc.sidechainHpf = c.scHpf;
+    cc.externalSidechain = c.externalSidechain;
     cc.mix = 1.0f;
     cc.link = 1.0f;
     mix_ = std::clamp(c.mix, 0.0f, 1.0f);
@@ -143,19 +145,20 @@ public:
     trim_ = model_ >= 4 ? 1.0f : hdsp::dbToGain(comp::kModelTrimDb[model_]);
   }
 
-  inline float process(float& l, float& r) noexcept {
+  inline float process(float& l, float& r,
+                       const hdsp::SidechainFrame& sc = {}) noexcept {
     const float dryL = l, dryR = r;
     float gr = 0.0f;
     switch (model_) {
-      case 0: gr = fetBlue_.process(l, r); break;
-      case 1: gr = fetBlack_.process(l, r); break;
-      case 2: gr = opto2A_.process(l, r); break;
-      case 3: gr = opto3A_.process(l, r); break;
-      case 7: gr = xpress_.process(l, r); break;
-      case 8: gr = clean_.process(l, r); break;
-      case 9: gr = molot_.process(l, r); break;
-      case 10: gr = red_.process(l, r); break;
-      default: gr = vca_.process(l, r); break;
+      case 0: gr = fetBlue_.process(l, r, sc); break;
+      case 1: gr = fetBlack_.process(l, r, sc); break;
+      case 2: gr = opto2A_.process(l, r, sc); break;
+      case 3: gr = opto3A_.process(l, r, sc); break;
+      case 7: gr = xpress_.process(l, r, sc); break;
+      case 8: gr = clean_.process(l, r, sc); break;
+      case 9: gr = molot_.process(l, r, sc); break;
+      case 10: gr = red_.process(l, r, sc); break;
+      default: gr = vca_.process(l, r, sc); break;
     }
     if (model_ == 5) {
       l = softSat(l, 1.15f);
